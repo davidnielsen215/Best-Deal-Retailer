@@ -14,7 +14,7 @@ mongoose.connect("mongodb://localhost:27017/bdr-subscription",
     { useNewUrlParser: true },
     (err) => {
         if (err) throw err;
-        console.log("Database connection established");
+        console.log("mongoDB connection established");
     }
 );
 

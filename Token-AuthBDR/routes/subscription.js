@@ -35,19 +35,18 @@ subRouter.get("/:subId", (req, res, next) => {
         return res.send(Subinfo);
     });
 });
-//Currently dysfunctional
-subRouter.put("/:subId", (req, res, next) => {
+//FINALLY FUNCTIONAL
+subRouter.put("/:id", (req, res, next) => {
     Subinfo.findByIdAndUpdate(
-        req.params.subId,
+        {_id: req.params.id},
         req.body,
-        { new: true },
-        (err, sub) => {
+        {new: true},
+        (err, Subinfo) => {
             if (err) {
-                console.log("Error");
-                res.status(500);
+                res.status(500)
                 return next(err);
-            }
-            return res.send(sub);
+            };
+            return res.send(Subinfo)
         }
     );
 });
