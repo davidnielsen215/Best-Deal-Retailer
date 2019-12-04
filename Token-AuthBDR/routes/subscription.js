@@ -3,7 +3,7 @@ const subRouter = express.Router();
 const Subinfo = require("../models/subinfo");
 
 subRouter.get("/", (req, res, next) => {
-    Subinfo.find((err, subs) => {
+    Subinfo.find({user: req.user._id},(err, subs) => {
         if (err) {
             res.status(500);
             return next(err);
@@ -14,6 +14,8 @@ subRouter.get("/", (req, res, next) => {
 
 subRouter.post("/", (req, res, next) => {
     const subinfo = new Subinfo(req.body);
+    // subinfo.user = req.user._id;
+
     subinfo.save(function (err, newSubinfo) {
         if (err) {
             res.status(500);
@@ -24,7 +26,7 @@ subRouter.post("/", (req, res, next) => {
 });
 //Currently dysfunctional
 subRouter.get("/:id", (req, res, next) => {
-    Subinfo.findById(req.params.id, (err, sub) => {
+    Subinfo.findOne({_id: req.params._id, user: req.user._id}, (err, sub) => {
         if (err) {
             res.status(500);
             return next(err);
@@ -37,8 +39,8 @@ subRouter.get("/:id", (req, res, next) => {
 });
 //FINALLY FUNCTIONAL
 subRouter.put("/:id", (req, res, next) => {
-    Subinfo.findByIdAndUpdate(
-        {_id: req.params.id},
+    Subinfo.findOneAndUpdate(
+        {_id: req.params.id, user: req.user._id},
         req.body,
         {new: true},
         (err, Subinfo) => {
@@ -51,8 +53,8 @@ subRouter.put("/:id", (req, res, next) => {
     );
 });
 //Currently dysfunctional
-subRouter.delete("/:subinfoId", (req, res, next) => {
-    Subinfo.findByIdAndRemove(req.params.subinfoId, (err, subinfo) => {
+subRouter.delete("/:id", (req, res, next) => {
+    Subinfo.findOneAndRemove({id: req.params._id, user: req.user._id}, (err, subinfo) => {
         if (err) {
             res.status(500);
             return next(err);
