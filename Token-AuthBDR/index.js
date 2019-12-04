@@ -18,7 +18,7 @@ mongoose.connect("mongodb://localhost:27017/bdr-subscription",
     }
 );
 
-app.use("/todo", require("./routes/todo"));
+app.use("/subscription", require("./routes/subscription"));
 
 app.use((err, req, res, next) => {
     console.error(err);
