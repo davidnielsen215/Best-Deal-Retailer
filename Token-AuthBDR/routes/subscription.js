@@ -23,8 +23,8 @@ subRouter.post("/", (req, res, next) => {
     });
 });
 //Currently dysfunctional
-subRouter.get("/:subId", (req, res, next) => {
-    Subinfo.findById(req.params.subId, (err, sub) => {
+subRouter.get("/:id", (req, res, next) => {
+    Subinfo.findById(req.params.id, (err, sub) => {
         if (err) {
             res.status(500);
             return next(err);
