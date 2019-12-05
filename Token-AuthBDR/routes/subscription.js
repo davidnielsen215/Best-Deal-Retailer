@@ -12,10 +12,10 @@ subRouter.get("/", (req, res, next) => {
     });
 });
 
+//Post Request through user token Functional
 subRouter.post("/", (req, res, next) => {
     const subinfo = new Subinfo(req.body);
-    // subinfo.user = req.user._id;
-
+    subinfo.user = req.user._id;
     subinfo.save(function (err, newSubinfo) {
         if (err) {
             res.status(500);
@@ -24,8 +24,9 @@ subRouter.post("/", (req, res, next) => {
         return res.status(201).send(newSubinfo);
     });
 });
+
 //Currently dysfunctional
-subRouter.get("/:id", (req, res, next) => {
+subRouter.get("/subinfoId", (req, res, next) => {
     Subinfo.findOne({_id: req.params._id, user: req.user._id}, (err, sub) => {
         if (err) {
             res.status(500);
@@ -40,7 +41,7 @@ subRouter.get("/:id", (req, res, next) => {
 //FINALLY FUNCTIONAL
 subRouter.put("/:id", (req, res, next) => {
     Subinfo.findOneAndUpdate(
-        {_id: req.params.id, user: req.user._id},
+        {_id: req.params._id, user: req.user._id},
         req.body,
         {new: true},
         (err, Subinfo) => {

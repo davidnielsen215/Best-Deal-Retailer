@@ -3,11 +3,11 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 25vmin;
 }
 
 .App-header {
-  background-color: rgb(80, 87, 117);
+  background: linear-gradient(90deg, rgba(0,0,8,1) 0%, rgba(0,80,201,1) 50%, rgba(0,0,0,1) 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,13 +18,23 @@
 }
 
 .App-link {
-  color: rgb(23, 22, 88);
+  color: rgb(159, 250, 141);
 }
 
 .login-input{
-  text-align: left;
+  text-align: center;
   padding-left: 10px;
   height: 35px;
-  width: 25%;
-  font-size: 27px;
+  width: 30vw;
+  font-size: 1.75vw;
+  border-radius: 10px;
+}
+
+.login-btn{
+  text-align: center;
+  padding-left: 10px;
+  height: 35px;
+  width: 31vw;
+  font-size: 1.75vw;
+  border-radius: 10px;
 }

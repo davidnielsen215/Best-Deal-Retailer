@@ -24,7 +24,9 @@ mongoose.connect("mongodb://localhost:27017/bdr-subscription",
 
 //Route user info from application to DB
 app.use("/auth", require("./routes/auth"))
-app.use("/subscription", require("./routes/subscription"));
+// app.use("/subscription", require("./routes/subscription"));
+
+app.use("/api/subscription", require("./routes/subscription"));
 //User has a JWT assinged to payload
 app.use("/api", expressJwt({secret: process.env.SECRET}));
 
