@@ -2,6 +2,7 @@ const express = require("express");
 const subRouter = express.Router();
 const Subinfo = require("../models/subinfo");
 
+//Get Request throug user token views all subscription types
 subRouter.get("/", (req, res, next) => {
     Subinfo.find({user: req.user._id},(err, subs) => {
         if (err) {
@@ -25,16 +26,17 @@ subRouter.post("/", (req, res, next) => {
     });
 });
 
+//Unable to retrieve individual subscription using _id in property field and subinfoId in endurl
 subRouter.get("/subinfoId", (req, res, next) => {
-    Subinfo.findOne({_id: req.params._id, user: req.user._id}, (err, sub) => {
+    Subinfo.findOne({_id: req.params._id, user: req.user._id}, (err, subinfo) => {
         if (err) {
             res.status(500);
             return next(err);
-        } else if (!sub) {
+        } else if (!subinfo) {
             res.status(404)
             return next(new Error("No subscription found."));
         }
-        return res.send(Subinfo);
+        return res.send(subinfo);
     });
 });
 
