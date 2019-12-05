@@ -34,6 +34,8 @@ function App() {
                         name="password"
                         type="password"
                         autoComplete='off'/>
+                    <br></br>
+                        <button className="login-btn">Log In</button>
       </header>
     </div>
   );
