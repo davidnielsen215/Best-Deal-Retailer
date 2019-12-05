@@ -4,8 +4,8 @@ require("dotenv").config();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 5000;
 const expressJwt = require("express-jwt");
+const PORT = process.env.PORT || 5000;
 
 //HTTP Request Logger Middleware
 app.use(morgan("dev"));
@@ -13,6 +13,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 //connect Application to Mongodb
+mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
 mongoose.connect("mongodb://localhost:27017/bdr-subscription",
 { useNewUrlParser: true },
@@ -22,13 +23,13 @@ mongoose.connect("mongodb://localhost:27017/bdr-subscription",
 }
 );
 
-//Route user info from application to DB
-app.use("/auth", require("./routes/auth"))
-// app.use("/subscription", require("./routes/subscription"));
-
-app.use("/api/subscription", require("./routes/subscription"));
 //User has a JWT assinged to payload
 app.use("/api", expressJwt({secret: process.env.SECRET}));
+
+app.use("/api/subscription", require("./routes/subscription"));
+
+//Route user info from application to DB
+app.use("/auth", require("./routes/auth"))
 
 //Error Handling
 app.use((err, req, res, next) => {

@@ -25,7 +25,6 @@ subRouter.post("/", (req, res, next) => {
     });
 });
 
-//Currently dysfunctional
 subRouter.get("/subinfoId", (req, res, next) => {
     Subinfo.findOne({_id: req.params._id, user: req.user._id}, (err, sub) => {
         if (err) {
@@ -38,7 +37,7 @@ subRouter.get("/subinfoId", (req, res, next) => {
         return res.send(Subinfo);
     });
 });
-//FINALLY FUNCTIONAL
+
 subRouter.put("/:id", (req, res, next) => {
     Subinfo.findOneAndUpdate(
         {_id: req.params._id, user: req.user._id},

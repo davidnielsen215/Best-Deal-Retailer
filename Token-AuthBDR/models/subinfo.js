@@ -6,9 +6,6 @@ const subSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Number
-    },
     completed: {
         type: Boolean,
         default: false
