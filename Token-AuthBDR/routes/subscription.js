@@ -40,6 +40,7 @@ subRouter.get("/subinfoId", (req, res, next) => {
     });
 });
 
+// Same issues as the retrieve request, need to be able to update subscription status
 subRouter.put("/:id", (req, res, next) => {
     Subinfo.findOneAndUpdate(
         {_id: req.params._id, user: req.user._id},
@@ -54,7 +55,8 @@ subRouter.put("/:id", (req, res, next) => {
         }
     );
 });
-//Currently dysfunctional
+
+//Same issue -need to be able to delete subscription status
 subRouter.delete("/:id", (req, res, next) => {
     Subinfo.findOneAndRemove({id: req.params._id, user: req.user._id}, (err, subinfo) => {
         if (err) {
